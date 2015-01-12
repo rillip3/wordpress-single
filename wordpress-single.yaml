@@ -53,6 +53,7 @@ parameters:
     constraints:
     - allowed_values:
       - Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)
+      - CentOS 6.5 (PVHVM)
       description: Must be a supported operating system.
 
   flavor:
