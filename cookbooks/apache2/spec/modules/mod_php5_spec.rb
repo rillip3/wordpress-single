@@ -1,24 +1,23 @@
 require 'spec_helper'
 
 describe 'apache2::mod_php5' do
-  before do
-    stub_command('which php').and_return(false)
-  end
-
   supported_platforms.each do |platform, versions|
     versions.each do |version|
       context "on #{platform.capitalize} #{version}" do
         let(:chef_run) do
-          ChefSpec::Runner.new(:platform => platform, :version => version).converge(described_recipe)
+          @chef_run
         end
 
         property = load_platform_properties(:platform => platform, :platform_version => version)
 
-        before do
+        before(:context) do
+          @chef_run = ChefSpec::SoloRunner.new(:platform => platform, :version => version)
           stub_command("#{property[:apache][:binary]} -t").and_return(true)
+          stub_command('which php').and_return(false)
+          @chef_run.converge(described_recipe)
         end
 
-        if %w(redhat centos fedora arch).include?(platform)
+        if %w(amazon redhat centos fedora arch).include?(platform)
           pkg = 'php'
           pkg = 'php53' if version.to_f < 6.0
           it "installs package #{pkg}" do
@@ -60,9 +59,8 @@ describe 'apache2::mod_php5' do
           expect(chef_run).to delete_file("#{property[:apache][:dir]}/conf.d/php.conf").with(:backup => false)
           expect(chef_run).to_not delete_file("#{property[:apache][:dir]}/conf.d/php.conf").with(:backup => true)
         end
+        it_should_behave_like 'an apache2 module', 'php5', true, 'libphp5.so'
       end
     end
   end
-
-  it_should_behave_like 'an apache2 module', 'php5', true, supported_platforms, 'libphp5.so'
 end

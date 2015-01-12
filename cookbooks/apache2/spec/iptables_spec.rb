@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 describe 'apache2::iptables' do
-
   # Test all defaults on all platforms
   supported_platforms.each do |platform, versions|
     versions.each do |version|
       context "on #{platform.capitalize} #{version}" do
         let(:chef_run) do
-          ChefSpec::Runner.new(:platform => platform, :version => version).converge(described_recipe)
+          ChefSpec::SoloRunner.new(:platform => platform, :version => version).converge(described_recipe)
         end
 
         it 'includes the `iptables::default` recipe' do

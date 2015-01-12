@@ -1,6 +1,62 @@
 mysql Cookbook CHANGELOG
 ========================
-This file is used to list changes made in each version of the mysql cookbook.
+
+v6.0.6 (2014-12-26)
+------------------
+- Fixing subtle bug where MysqlCookbook::Helper methods were polluting Chef::Resource
+
+v6.0.5 (2014-12-25)
+------------------
+- Using 'include_recipe' instead of 'recipe_eval' in LWRP
+- Fixing type checking on package_name attribute in mysql_client resource.
+
+v6.0.4 (2014-12-21)
+------------------
+- Suggest available versions if current is not available for current platform.
+
+v6.0.3 (2014-12-17)
+------------------
+- Adding bind_address parameter to mysql_service resource
+
+v6.0.2 (2014-12-17)
+------------------
+- Fixing sysvinit provider to survive reboots
+
+v6.0.1 (2014-12-16)
+------------------
+- Fixing Upstart template to survive reboots
+
+v6.0.0 (2014-12-15)
+------------------
+- Major version update
+- Cookbook now provides LWRPs instead of recipes
+- Platform providers re-factored into init system providers
+- Separated :create and :start actions for use in recipes that build containers
+- mysql_service now supports multiple instances on the same machine
+- mysql_service no longer attempts to manage user records
+- Removal of debian-sys-maint
+- Unified Sysvinit script that works on all platforms
+- mysql_config resource introduced
+- mysql_client fixed up
+- Refactored acceptance tests
+- Temporarily dropped FreeBSD support
+
+v5.6.1 (2014-10-29)
+------------------
+- Use Gem::Version instead of Chef::Version
+
+v5.6.0 (2014-10-29)
+------------------
+- Changing default charset to utf8
+- Quoting passwords in debian.cnf.erb
+- Amazon 2014.09 support
+- Ubuntu 14.10 support
+- Only hide passwords from STDOUT via "sensitive true" in chef-client higher than 11.14
+- Updating test harness
+
+v5.5.4 (2014-10-07)
+------------------
+- Adding sensitive flag to execute resources to protect passwords from logs  
 
 v5.5.3 (2014-09-24)
 ------------------

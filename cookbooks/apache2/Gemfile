@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf',  '~> 3.1'
+gem 'berkshelf',  '~> 3.2'
 
 group :unit do
   gem 'foodcritic',       '~> 4.0'
-  gem 'rubocop',          '~> 0.24', '>= 0.24.0'
-  gem 'chefspec',         '~> 4.0'
+  gem 'rubocop',          '~> 0.28', '>= 0.28.0'
+  gem 'chefspec',         '~> 4.1'
 end
 
 group :integration do
@@ -24,4 +24,9 @@ group :development do
   gem 'rb-fsevent', :require => false
   gem 'rb-inotify', :require => false
   gem 'terminal-notifier-guard', :require => false
+  require 'rbconfig'
+  if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
+    gem 'wdm', '>= 0.1.0'
+    gem 'win32console'
+  end
 end

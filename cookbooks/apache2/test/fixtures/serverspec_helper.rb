@@ -1,46 +1,38 @@
 require 'serverspec'
 require 'json'
 
-include SpecInfra::Helper::Exec
-include SpecInfra::Helper::DetectOS
-include SpecInfra::Helper::Properties
+
+# centos-59 doesn't have /sbin in the default path,
+# so we must ensure it's on serverspec's path
+set :path, '/sbin:/usr/local/sbin:$PATH'
+set :backend, :exec
 
 # http://serverspec.org/advanced_tips.html
 # os[:family]  # RedHat, Ubuntu, Debian and so on
 # os[:release] # OS release version (cleaned up in v2)
 # os[:arch]
 osmapping = {
-  'RedHat' => {
-    :platform_family => 'rhel',
-    :platform => 'centos',
-    :platform_version => '6.5'
-  },
-  'RedHat7' => {
+  'redhat' => {
     :platform_family => 'rhel',
     :platform => 'centos',
     :platform_version => '7.0'
   },
-  'Fedora' => {
+  'fedora' => {
     :platform_family => 'rhel',
     :platform => 'fedora',
     :platform_version => '20'
   },
-  'Ubuntu' => {
+  'ubuntu' => {
     :platform_family => 'debian',
     :platform => 'ubuntu',
     :platform_version => '12.04'
   },
-  'Debian' => {
+  'debian' => {
     :platform_family => 'debian',
     :platform => 'debian',
-    :platform_version => '7.4'
+    :platform_version => '7.6'
   },
-  'FreeBSD' => {
-    :platform_family => 'freebsd',
-    :platform => 'freebsd',
-    :platform_version => '9.2'
-  },
-  'FreeBSD10' => {
+  'freebsd' => {
     :platform_family => 'freebsd',
     :platform => 'freebsd',
     :platform_version => '10.0'
@@ -52,7 +44,8 @@ def ohai_platform(os, osmapping)
   ohaistub = {}
   ohaistub[:platform_family] = osmapping[os[:family]][:platform_family]
   ohaistub[:platform] = osmapping[os[:family]][:platform]
-  if os[:release]
+  # Hack: avoid freebsd to just use a release of 10 and force 10.0 instead to match chefspec
+  if os[:release] && os[:family] != 'freebsd'
     ohaistub[:platform_version] = os[:release]
   else
     ohaistub[:platform_version] = osmapping[os[:family]][:platform_version]
@@ -66,10 +59,5 @@ def load_nodestub(ohai)
 end
 
 RSpec.configure do |config|
-  set_property load_nodestub(ohai_platform(backend.check_os, osmapping))
-  config.before(:all) do
-    # centos-59 doesn't have /sbin in the default path,
-    # so we must ensure it's on serverspec's path
-    config.path = '/sbin'
-  end
+  set_property load_nodestub(ohai_platform(os, osmapping))
 end

@@ -38,6 +38,13 @@ node.set[:rax_mysql_tunables][:config_options][:mysqld] = {
 
 include_recipe 'rax-mysql-tunables::default'
 
-service 'mysql' do
-  action :restart
+case node['platform']
+  when 'ubnutu', 'debian'
+    service 'mysql' do
+      action :restart
+    end
+  when 'redhat', 'centos'
+    service 'mysqld' do
+      action :restart
+    end
 end
