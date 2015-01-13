@@ -24,7 +24,7 @@ cookbook 'vsftpd',
 cookbook 'monit',
   :git => 'https://github.com/apsoto/monit'
 cookbook 'hollandbackup',
-  :git => 'https://github.com/brint/hollandbackup'
+  :git => 'https://github.com/rillip3/hollandbackup'
 cookbook 'varnish'
 cookbook 'lsyncd',
   :git => 'https://github.com/dgivens/chef-lsyncd/'

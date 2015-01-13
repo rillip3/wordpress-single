@@ -5,7 +5,11 @@
 # Copyright 2012-2014, David Joos
 #
 
-include_recipe "mysql::client"
+unless platform_family?('windows') # No MySQL client on Windows
+  mysql_client 'default' do
+    action :create·
+  end
+end
 
 package "holland-mysqldump" do
     action :upgrade
