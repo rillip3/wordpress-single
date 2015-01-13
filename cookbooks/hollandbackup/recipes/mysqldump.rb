@@ -7,7 +7,7 @@
 
 unless platform_family?('windows') # No MySQL client on Windows
   mysql_client 'default' do
-    action :create·
+    action :create
   end
 end
 
