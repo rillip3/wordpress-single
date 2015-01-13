@@ -20,6 +20,7 @@
 # limitations under the License.
 #
 
+include_recipe "mysql-chef_gem" # Replaces mysql::ruby
 unless platform_family?('windows') # No MySQL client on Windows
   mysql_client 'default' do
     action :create
