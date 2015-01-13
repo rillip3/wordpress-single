@@ -3,6 +3,7 @@
         "version": "2.4",
         "package": "apache2",
         "binary": "/usr/sbin/apache2",
+        "mpm": "event",
         "dir": "/etc/apache2",
         "lib_dir": "/usr/lib/apache2",
         "libexec_dir": "/usr/lib/apache2/modules",
@@ -31,6 +32,9 @@
             "mime",
             "negotiation",
             "setenvif"
-        ]
+        ],
+        "mod_auth_openid": {
+            "version": "0.8"
+        }
     }
 }

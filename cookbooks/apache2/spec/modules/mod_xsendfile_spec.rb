@@ -5,16 +5,18 @@ describe 'apache2::mod_xsendfile' do
     versions.each do |version|
       context "on #{platform.capitalize} #{version}" do
         let(:chef_run) do
-          ChefSpec::Runner.new(:platform => platform, :version => version).converge(described_recipe)
+          @chef_run
         end
 
         property = load_platform_properties(:platform => platform, :platform_version => version)
 
-        before do
+        before(:context) do
+          @chef_run = ChefSpec::SoloRunner.new(:platform => platform, :version => version)
           stub_command("#{property[:apache][:binary]} -t").and_return(true)
+          @chef_run.converge(described_recipe)
         end
 
-        if %w(redhat centos fedora arch).include?(platform)
+        if %w(amazon redhat centos fedora arch).include?(platform)
           it 'installs package mod_xsendfile' do
             expect(chef_run).to install_package('mod_xsendfile')
             expect(chef_run).to_not install_package('not_mod_xsendfile')
@@ -47,9 +49,8 @@ describe 'apache2::mod_xsendfile' do
           expect(chef_run).to delete_file("#{property[:apache][:dir]}/conf.d/xsendfile.conf").with(:backup => false)
           expect(chef_run).to_not delete_file("#{property[:apache][:dir]}/conf.d/xsendfile.conf").with(:backup => true)
         end
+        it_should_behave_like 'an apache2 module', 'xsendfile', false
       end
     end
   end
-
-  it_should_behave_like 'an apache2 module', 'xsendfile', false, supported_platforms
 end
