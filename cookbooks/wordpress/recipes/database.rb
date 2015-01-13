@@ -42,7 +42,7 @@ if is_local_host? db['host']
   mysql_service 'default' do
     port '3306'
     version '5.5'
-    initial_root_password node['mysql']['server_root_password']
+    initial_root_password "#{node['mysql']['server_root_password']}"
     action [:create, :start]
   end
 
