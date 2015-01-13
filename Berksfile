@@ -12,7 +12,7 @@ cookbook 'memcached'
 cookbook 'mysql',
   :git => 'https://github.com/opscode-cookbooks/mysql'
 cookbook 'wordpress',
-  :git => 'https://github.com/opscode-cookbooks/wordpress'
+  :git => 'https://github.com/rillip3/wordpress-cookbook'
 cookbook 'php',
   :git => 'https://github.com/opscode-cookbooks/php'
 cookbook 'sysctl',
