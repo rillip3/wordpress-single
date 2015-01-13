@@ -17,6 +17,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+mysql_service 'default' do
+  port '3306'
+  version '5.5'
+  initial_root_password node['mysql']['server_root_password']
+  action [:create, :start]
+end
+
 
 template '/root/.my.cnf' do
   source 'dotmy.cnf.erb'

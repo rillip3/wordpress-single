@@ -342,7 +342,6 @@ resources:
                    "recipe[build-essential]",
                    "recipe[rax-wordpress::apache-prep]",
                    "recipe[sysctl::attribute_driver]",
-                   "recipe[mysql::server]",
                    "recipe[rax-wordpress::mysql]",
                    "recipe[hollandbackup]",
                    "recipe[hollandbackup::mysqldump]",

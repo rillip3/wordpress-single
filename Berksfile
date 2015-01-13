@@ -29,7 +29,7 @@ cookbook 'varnish'
 cookbook 'lsyncd',
   :git => 'https://github.com/dgivens/chef-lsyncd/'
 cookbook 'rax-wordpress',
-  :git => 'https://github.com/brint/rax-wordpress-cookbook'
+  :git => 'https://github.com/rillip3/rax-wordpress-cookbook'
 cookbook 'rax-mysql-tunables',
   :git => 'https://github.com/JasonBoyles/rax-mysql-tunables'
 cookbook 'cron',
