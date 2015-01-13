@@ -31,7 +31,7 @@ cookbook 'lsyncd',
 cookbook 'rax-wordpress',
   :git => 'https://github.com/rillip3/rax-wordpress-cookbook'
 cookbook 'rax-mysql-tunables',
-  :git => 'https://github.com/JasonBoyles/rax-mysql-tunables'
+  :git => 'https://github.com/rillip3/rax-mysql-tunables'
 cookbook 'cron',
   :git => 'https://github.com/opscode-cookbooks/cron',
   :ref => '8007fc9ef6083e04554d729b4ffaef4e7ca81d7a'

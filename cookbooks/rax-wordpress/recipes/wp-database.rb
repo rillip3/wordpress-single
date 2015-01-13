@@ -18,7 +18,11 @@
 # limitations under the License.
 #
 
-include_recipe "mysql::client" unless platform_family?('windows') # No MySQL client on Windows
+unless platform_family?('windows') # No MySQL client on Windows
+  mysql_client 'default' do
+    action :create 
+  end
+end
 
 db = node['wordpress']['db']
 

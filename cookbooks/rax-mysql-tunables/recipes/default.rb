@@ -17,6 +17,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+directory "/etc/mysql/conf.d/" do
+  owner "root"
+  group "root"
+  recursive true
+end
+
 
 template "/etc/mysql/conf.d/rax-tunables.cnf" do
   source "tunables.cnf.erb"
