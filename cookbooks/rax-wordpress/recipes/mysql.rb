@@ -38,5 +38,5 @@ node.set[:rax_mysql_tunables][:config_options][:mysqld] = {
 include_recipe 'rax-mysql-tunables::default'
 
 service 'mysql' do
-  action :restart
+  action :restart :delayed
 end
