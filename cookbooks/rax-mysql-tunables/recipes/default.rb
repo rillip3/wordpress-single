@@ -33,7 +33,3 @@ template "/etc/mysql/conf.d/rax-tunables.cnf" do
      :sections => node[:rax_mysql_tunables][:config_options]
   })
 end
-
-link '/var/run/mysqld/mysqld.sock' do
-  to '/run/mysql-default/mysqld.sock'
-end
