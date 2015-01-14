@@ -1,3 +1,3 @@
 link '/var/run/mysqld/mysqld.sock' do
-  to default['rax']['mysql_sock']
+  to node['rax']['mysql_sock']
 end
