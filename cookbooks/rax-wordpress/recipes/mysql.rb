@@ -17,15 +17,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-template '/root/.my.cnf' do
-  source 'dotmy.cnf.erb'
-  owner 'root'
-  group 'root'
-  mode '0600'
-  variables ({
-    rootpasswd: node['mysql']['server_root_password']
-  })
-end
 
 innodb_mempercent = node[:rax][:mysql][:innodb_buffer_pool_mempercent].to_f
 
@@ -37,6 +28,13 @@ node.set[:rax_mysql_tunables][:config_options][:mysqld] = {
 
 include_recipe 'rax-mysql-tunables::default'
 
-service 'mysql' do
-  action :restart :delayed
+template '/root/.my.cnf' do
+  source 'dotmy.cnf.erb'
+  owner 'root'
+  group 'root'
+  mode '0600'
+  variables ({
+    rootpasswd: node['mysql']['server_root_password']
+  })
+  notifies :restart, 'mysql_service[default]', :delayed
 end
