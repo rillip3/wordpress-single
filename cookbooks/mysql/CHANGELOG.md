@@ -1,6 +1,23 @@
 mysql Cookbook CHANGELOG
 ========================
 
+v6.0.10 (2015-01-19)
+------------------
+- Fix #282 - Fixing up data_dir template variable
+
+v6.0.9 (2015-01-19)
+------------------
+- Fix #282 - undefined method `parsed_data_dir' bug
+
+v6.0.8 (2015-01-19)
+------------------
+- Refactoring helper methods out of resource classes
+
+v6.0.7 (2015-01-14)
+------------------
+- Fixing timing issue with Upstart provider :restart and :reload
+  actions where service returns before being available
+
 v6.0.6 (2014-12-26)
 ------------------
 - Fixing subtle bug where MysqlCookbook::Helper methods were polluting Chef::Resource

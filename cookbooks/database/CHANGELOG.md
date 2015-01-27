@@ -1,3 +1,28 @@
+Database cookbook README
+========================
+
+v3.0.3 (2015-01-20)
+-------------------
+- Bugfix: bugfix: lack of node['mysql']['version'] causing NilClass error
+
+v3.0.2 (2015-01-16)
+-------------------
+- Fix bug to allow grants on databases with special characters
+
+v3.0.1 (2015-01-16)
+-------------------
+- Enabling ssl for provider_mysql_database_user
+
+v3.0.0 (2015-01-15)
+-------------------
+- Removing out of scope recipes
+- porting to mysql2_chef_gem
+- adding test-kitchen suites for mysql
+
+v2.3.1 (2014-12-13)
+-------------------
+- Locking mysql and mysql-chef_gem dependencies down in metadata.rb
+
 v2.3.0 (2014-08-13)
 -------------------
 - [#62] Allow requiring SSL
