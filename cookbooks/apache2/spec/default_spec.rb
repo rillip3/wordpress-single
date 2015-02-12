@@ -25,8 +25,11 @@ describe 'apache2::default' do
           end
 
           it "installs package #{property[:apache][:package]}" do
-            if platform == 'freebsd'
+            case platform
+            when 'freebsd'
               expect(chef_run).to install_freebsd_package(property[:apache][:package])
+            when 'amazon', 'fedora', 'redhat', 'centos'
+              expect(chef_run).to install_yum_package(property[:apache][:package])
             else
               expect(chef_run).to install_package(property[:apache][:package])
             end
@@ -263,12 +266,12 @@ describe 'apache2::default' do
 
           it 'enables and starts the apache2 service' do
             expect(chef_run).to enable_service('apache2').with(
-                                    :service_name => property[:apache][:service_name],
-                                    :restart_command => property[:apache][:service_restart_command],
-                                    :reload_command => property[:apache][:service_reload_command],
-                                    :supports => { :start => true, :restart => true, :reload => true, :status => true },
-                                    :action => [:enable, :start]
-                                )
+              :service_name => property[:apache][:service_name],
+              :restart_command => property[:apache][:service_restart_command],
+              :reload_command => property[:apache][:service_reload_command],
+              :supports => { :start => true, :restart => true, :reload => true, :status => true },
+              :action => [:enable, :start]
+            )
           end
         end
         context 'with invalid apache configuration' do

@@ -1,6 +1,6 @@
 {
   "name": "database",
-  "version": "3.0.3",
+  "version": "4.0.2",
   "description": "provides LWRPs for common database tasks",
   "long_description": "",
   "maintainer": "Chef Software, Inc.",
@@ -17,8 +17,7 @@
     "amazon": ">= 0.0.0"
   },
   "dependencies": {
-    "postgresql": ">= 1.0.0",
-    "mysql2_chef_gem": "~> 1.0"
+    "postgresql": ">= 1.0.0"
   },
   "recommendations": {
   },

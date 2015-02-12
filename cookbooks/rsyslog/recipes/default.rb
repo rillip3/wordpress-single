@@ -32,8 +32,8 @@ directory "#{node['rsyslog']['config_prefix']}/rsyslog.d" do
 end
 
 directory node['rsyslog']['working_dir']  do
-  owner 'root'
-  group 'root'
+  owner node['rsyslog']['user']
+  group node['rsyslog']['group']
   mode  '0700'
 end
 
@@ -91,7 +91,7 @@ else
 end
 
 service node['rsyslog']['service_name'] do
-  supports :restart => true, :reload => true, :status => true
+  supports :restart => true, :status => true
   action   [:enable, :start]
   provider service_provider
 end

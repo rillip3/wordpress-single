@@ -1,3 +1,5 @@
+require 'shellwords'
+
 module MysqlCookbook
   module Helpers
     include Chef::DSL::IncludeRecipe
@@ -117,7 +119,7 @@ module MysqlCookbook
         mkdir /tmp/#{mysql_name}
         cat > /tmp/#{mysql_name}/my.sql <<-EOSQL
 DELETE FROM mysql.user ;
-CREATE USER 'root'@'%' IDENTIFIED BY '#{new_resource.initial_root_password}' ;
+CREATE USER 'root'@'%' IDENTIFIED BY '#{Shellwords.escape(new_resource.initial_root_password)}' ;
 GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 FLUSH PRIVILEGES;
 DROP DATABASE IF EXISTS test ;
@@ -182,6 +184,7 @@ EOSQL
     end
 
     def socket_file
+      return new_resource.socket if new_resource.socket
       "#{run_dir}/mysqld.sock"
     end
 
@@ -301,7 +304,7 @@ EOSQL
       return platform_version.to_i.to_s if platform_family == 'debian'
       return platform_version.to_i.to_s if platform_family == 'rhel'
       return platform_version.to_s if platform_family == 'debian' && platform_version =~ /sid$/
-      return platform_version_to_s if platform_family == 'freebsd'
+      return platform_version.to_s if platform_family == 'freebsd'
     end
 
     def parsed_data_dir

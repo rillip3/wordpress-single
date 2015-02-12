@@ -1,6 +1,29 @@
 Database cookbook README
 ========================
 
+v4.0.2 (2015-02-09)
+-------------------
+- Removing leftover mysql recipe that installs the mysql2_chef_gem.
+
+v4.0.1 (2015-02-05)
+-------------------
+- Fixing merge conflicts with master on 4.0.0 attempted release
+
+v4.0.0 (2015-02-05)
+-------------------
+- Decoupled mysql2_chef_gem cookbook.
+  Users must now install it themselves before utilizing mysql_database
+  or mysql_database_user resources.
+- Fixing various MilClass errors in mysql providers
+- Restoring missing :query action for mysql
+- Restoring grant_option support for mysql
+- Adding revoke action for mysql
+
+v3.1.0 (2015-01-30)
+-------------------
+- Add support for postgresql_database_user privileges
+- Add postgresql_database_test cookbook to test/fixtures
+
 v3.0.3 (2015-01-20)
 -------------------
 - Bugfix: bugfix: lack of node['mysql']['version'] causing NilClass error

@@ -38,5 +38,5 @@
   "recipes": {
     "runit": "Installs and configures runit"
   },
-  "version": "1.5.14"
+  "version": "1.5.16"
 }
